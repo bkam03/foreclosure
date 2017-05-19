@@ -1,6 +1,7 @@
 'use strict';
 
 function loan(){
+  //private var
   var account = {
     borrowed : 550000,
     balance : 286000,
@@ -9,6 +10,7 @@ function loan(){
     defaultedToForeclose : 5,
     foreclosed : false
   };
+  //private funct
   var missPayment = function(){
     var current = account.defaulted++;
     if(current >= account.defaultedToForeclose) {
@@ -18,6 +20,17 @@ function loan(){
   return {
     getBalance : function(){
       return balance;
+    },
+    receivePayment : function(amount) {
+      if(amount < account.monthlyPayment) {
+        missPayment();
+      }
+    },
+    getMonthlyPayment : function(){
+      return account.monthlyPayment;
+    },
+    isForeclosed : function(){
+      return account.foreclosed;
     }
   };
 }
